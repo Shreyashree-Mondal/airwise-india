@@ -1,0 +1,61 @@
+city,location_id,name,sensor_id,excluded
+Delhi,5627,"CRRI Mathura Road, New Delhi - IMD",12234678,False
+Delhi,5541,"Burari Crossing, New Delhi - IMD",12234684,False
+Delhi,5610,"North Campus, DU, Delhi - IMD",12234690,False
+Delhi,5404,"Pusa, Delhi - IMD",12234702,False
+Delhi,5570,"Aya Nagar, New Delhi - IMD",12234708,False
+Delhi,5634,"Lodhi Road, New Delhi - IMD",12234714,False
+Delhi,5630,"Shadipur, Delhi - CPCB",12234726,False
+Delhi,6359,"IHBAS, Dilshad Garden,New Delhi - CPCB",12234735,False
+Delhi,5622,"NSIT Dwarka, Delhi - CPCB",12234744,False
+Delhi,5613,"ITO, New Delhi - CPCB",12234753,False
+Delhi,5626,"DTU, New Delhi - CPCB",12234760,False
+Delhi,6358,"Mandir Marg, New Delhi - DPCC",12234778,False
+Delhi,17,"R K Puram, Delhi - DPCC",12234787,False
+Delhi,50,"Punjabi Bagh, Delhi - DPCC",12234796,False
+Delhi,8917,"Ashok Vihar, Delhi - DPCC",12235002,False
+Delhi,6934,"Dr. Karni Singh Shooting Range, Delhi - DPCC",12235011,False
+Delhi,6931,"Dwarka-Sector 8, Delhi - DPCC",12235020,False
+Delhi,8235,"Jahangirpuri, Delhi - DPCC",12235029,False
+Delhi,6957,"Jawaharlal Nehru Stadium, Delhi - DPCC",12235038,False
+Delhi,6929,"Major Dhyan Chand National Stadium, Delhi - DPCC",12235047,False
+Delhi,8239,"Okhla Phase-2, Delhi - DPCC",12235074,False
+Delhi,8365,"Nehru Nagar, Delhi - DPCC",12235083,False
+Delhi,10831,"Rohini, Delhi - DPCC",12235092,False
+Delhi,6960,"Patparganj, Delhi - DPCC",12235101,False
+Delhi,8475,"Sonia Vihar, Delhi - DPCC",12235110,False
+Delhi,8915,"Wazirpur, Delhi - DPCC",12235124,False
+Delhi,6938,"Vivek Vihar, Delhi - DPCC",12235133,False
+Delhi,5665,"Vasundhara, Ghaziabad - UPPCB",12235160,False
+Delhi,8472,"Bawana, Delhi - DPCC",12235294,False
+Delhi,10486,"Mundka, Delhi - DPCC",12235303,False
+Delhi,10484,"Sri Aurobindo Marg, Delhi - DPCC",12235312,False
+Delhi,235,"Anand Vihar, New Delhi - DPCC",12235610,False
+Delhi,6932,"Alipur, Delhi - DPCC",12235698,False
+Delhi,10921,"NISE Gwal Pahari, Gurugram - IMD",12235707,False
+Delhi,6924,"Indirapuram, Ghaziabad - UPPCB",12235779,False
+Delhi,7005,"Loni, Ghaziabad - UPPCB",12235787,False
+Delhi,6986,"Knowledge Park - V, Greater Noida - UPPCB",12235935,False
+Delhi,6980,"Sector-1, Noida - UPPCB",12235951,False
+Delhi,10900,"Teri Gram, Gurugram - HSPCB",12236251,True
+Delhi,11603,"Chandni Chowk, Delhi - IITM",12236361,False
+Delhi,11607,"Lodhi Road, Delhi - IITM",12236376,True
+Hyderabad,5599,"Bollaram Industrial Area, Hyderabad - TSPCB",12235400,True
+Hyderabad,407,"Zoo Park, Hyderabad - TSPCB",12235583,False
+Hyderabad,352465,"New Malakpet, Hyderabad - TSPCB",12237089,False
+Hyderabad,344103,"ECIL Kapra, Hyderabad - TSPCB",12237098,False
+Hyderabad,344140,"Somajiguda, Hyderabad - TSPCB",12237116,False
+Hyderabad,344104,"Kompally Municipal Office, Hyderabad - TSPCB",12237125,False
+Hyderabad,344142,"Nacharam_TSIIC IALA, Hyderabad - TSPCB",12237134,False
+Hyderabad,346258,"Kokapet, Hyderabad - TSPCB",12237161,False
+Hyderabad,5623,"Central University, Hyderabad - TSPCB",12242121,False
+Hyderabad,5647,"Sanathnagar, Hyderabad - TSPCB",12242129,False
+Kolkata,5614,"Padmapukur, Howrah - WBPCB",12234975,False
+Kolkata,10844,"Ghusuri, Howrah - WBPCB",12235496,False
+Kolkata,10633,"Victoria, Kolkata - WBPCB",12235680,False
+Kolkata,6946,"Belur Math, Howrah - WBPCB",12235814,False
+Kolkata,6981,"Fort William, Kolkata - WBPCB",12235878,False
+Kolkata,6950,"Jadavpur, Kolkata - WBPCB",12235887,False
+Kolkata,10904,"Rabindra Sarobar, Kolkata - WBPCB",12235967,False
+Kolkata,10851,"Bidhannagar, Kolkata - WBPCB",12235994,False
+Kolkata,10918,"Ballygunge, Kolkata - WBPCB",12236012,False
