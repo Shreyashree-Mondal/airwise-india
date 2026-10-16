@@ -53,6 +53,8 @@ def make_world(scenario="healthy"):
             t = t[(t < NOW - pd.Timedelta(hours=60)) | (t > NOW - pd.Timedelta(hours=54))]
         if scenario == "hyderabad_stale" and city == "Hyderabad":
             t = t[t <= NOW - pd.Timedelta(hours=12)]
+        if scenario == "feed_outage":
+            t = t[t <= NOW - pd.Timedelta(hours=40)]
         vals = BASE[city] + 10 * np.sin(2 * np.pi * (t.hour + 0.5) / 24) + (sid % 5)
         results = [{"value": float(v), "period": {"datetimeFrom": {"utc": x.strftime("%Y-%m-%dT%H:%M:%SZ")}}}
                    for x, v in zip(t, vals)]
@@ -249,3 +251,32 @@ def test_total_data_outage_does_not_crash(env):
 def test_main_requires_the_api_key(monkeypatch):
     monkeypatch.delenv("OPENAQ_API_KEY", raising=False)
     assert P.main() == 1
+
+
+def test_main_strips_whitespace_and_line_breaks_from_the_key(monkeypatch, tmp_path):
+    seen = {}
+
+    def fake_run(sensors, models, out, key, **kw):
+        seen["key"] = key
+        return {"cities": {}, "fetch_failures": []}
+
+    monkeypatch.setattr(P, "run", fake_run)
+    monkeypatch.setenv("OPENAQ_API_KEY", "  abc123\n")
+    assert P.main() == 0
+    assert seen["key"] == "abc123"
+
+
+def test_feed_outage_gives_no_forecast_for_a_time_that_has_passed(env):
+    res = go(env, "feed_outage")
+    for city in F.CITIES:
+        c = res["cities"][city]
+        assert c["status"] == "outdated", (city, c)
+        assert c["age_hours"] > 24 and c["as_of_ist"] is not None
+        assert "forecast_pm25" not in c and "range_low" not in c and "target_ist" not in c
+    assert not (env["out"] / "forecast_log.csv").exists()
+
+
+def test_data_a_few_hours_old_keeps_its_forecast_marked_stale(env):
+    c = go(env, "hyderabad_stale")["cities"]["Hyderabad"]
+    assert c["status"] == "stale" and c["age_hours"] < 24
+    assert pd.Timestamp(c["target_ist"]) > pd.Timestamp("2026-10-15T17:30")  # target is still ahead of NOW (IST)
