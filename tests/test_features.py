@@ -287,6 +287,22 @@ def test_latest_rows_flags_stale_and_skips_short_history(synthetic):
     assert F.latest_feature_rows(short, now).empty
 
 
+def test_older_complete_hours_never_stand_in_for_an_incomplete_newest_hour(synthetic):
+    gold, weather, fc_raw = synthetic
+    last_hour = gold["hour_ist"].max()
+    # Kolkata loses six hours three days before its newest reading: only ~2 days of unbroken history remain
+    cut = (gold["city"] == "Kolkata") & (gold["hour_ist"] > last_hour - pd.Timedelta(hours=75)) \
+        & (gold["hour_ist"] <= last_hour - pd.Timedelta(hours=69))
+    series = F.build_model_series(gold[~cut])
+    feats = F.add_forecast_features(F.build_features(series, weather), F.prepare_forecast_day2(fc_raw))
+    # older Kolkata hours (before the gap) do have complete features ...
+    old = feats[(feats["city"] == "Kolkata") & (feats["hour_ist"] < last_hour - pd.Timedelta(hours=75))]
+    assert old[F.FEATURES].notna().all(axis=1).any()
+    # ... but they must not be returned
+    rows = F.latest_feature_rows(feats, last_hour + pd.Timedelta(hours=1))
+    assert "Kolkata" not in set(rows["city"]) and {"Delhi", "Hyderabad"} <= set(rows["city"])
+
+
 def test_feature_list_matches_training_meta():
     meta_path = Path(__file__).resolve().parents[1] / "models" / "meta.json"
     if not meta_path.exists():
