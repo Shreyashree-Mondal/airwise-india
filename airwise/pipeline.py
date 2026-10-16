@@ -3,6 +3,15 @@
     python -m airwise.pipeline
 
 Reads the OpenAQ key from the environment variable OPENAQ_API_KEY (never from a file).
+Each city gets one status in latest.json:
+    ok                    fresh data and a forecast
+    stale                 newest data is older than MAX_AGE_HOURS, but the forecast hour is still ahead
+    outdated              newest data is a day old or more, so the hour to forecast has already passed
+                          (no forecast numbers are given)
+    insufficient_history  less than a week of unbroken data (after a gap of more than 3 hours)
+    weather_unavailable   the weather source failed
+    no_data               no sensor readings could be fetched
+
 Writes, inside data/:
     latest.json         what the app shows
     forecast_log.csv    one row per city per run (to compare forecasts with outcomes later)
@@ -90,16 +99,23 @@ def run(sensors_path, models_dir, out_dir, api_key, now_utc=None, session=None,
         else:
             r, p = row.iloc[0], preds[preds["city"] == city].iloc[0]
             info.update({
-                "status": "stale" if bool(r["is_stale"]) else "ok",
                 "as_of_ist": _iso(r["hour_ist"]),
-                "target_ist": _iso(r["target_time"]),
                 "age_hours": _num(r["age_hours"]),
                 "current_pm25": _num(r["pm25"]),
-                "forecast_pm25": _num(p["pred"]),
-                "range_low": _num(p["lo"]),
-                "range_high": _num(p["hi"]),
                 "sensors_in_latest_hour": int(r["n_sensors"]) if pd.notna(r["n_sensors"]) else None,
             })
+            if pd.Timestamp(r["target_time"]) <= now_ist:
+                # The hour being forecast is already in the past: the newest reading is too old to say
+                # anything about the future. Report the outage, but give no forecast numbers.
+                info["status"] = "outdated"
+            else:
+                info.update({
+                    "status": "stale" if bool(r["is_stale"]) else "ok",
+                    "target_ist": _iso(r["target_time"]),
+                    "forecast_pm25": _num(p["pred"]),
+                    "range_low": _num(p["lo"]),
+                    "range_high": _num(p["hi"]),
+                })
         cities[city] = info
 
     result = {
@@ -147,7 +163,7 @@ def _write_outputs(out_dir: Path, result: dict, rows: pd.DataFrame, preds: pd.Da
 
 
 def main():
-    key = os.environ.get("OPENAQ_API_KEY")
+    key = (os.environ.get("OPENAQ_API_KEY") or "").strip()  # a pasted secret often ends with a line break
     if not key:
         print("OPENAQ_API_KEY is not set", file=sys.stderr)
         return 1
