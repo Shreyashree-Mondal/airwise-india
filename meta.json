@@ -1,0 +1,84 @@
+{
+  "horizon_hours": 24,
+  "target": "pm25 at t+24h minus pm25 at t (delta model)",
+  "features": [
+    "pm25",
+    "lag_1",
+    "lag_2",
+    "lag_3",
+    "lag_6",
+    "lag_12",
+    "lag_24",
+    "lag_48",
+    "lag_144",
+    "lag_168",
+    "roll_mean_6",
+    "roll_mean_24",
+    "roll_std_24",
+    "diff_1",
+    "diff_6",
+    "precip_24h",
+    "temperature_2m",
+    "relative_humidity_2m",
+    "dew_point_2m",
+    "wind_speed_10m",
+    "precipitation",
+    "surface_pressure",
+    "cloud_cover",
+    "wind_dir_sin",
+    "wind_dir_cos",
+    "hour_sin",
+    "hour_cos",
+    "dow",
+    "city_code",
+    "fc2_temp",
+    "fc2_rh",
+    "fc2_wind",
+    "fc2_prec",
+    "fc2_pres",
+    "fc2_dtemp",
+    "fc2_dwind",
+    "fc2_dpres",
+    "fc2_drh"
+  ],
+  "cities": [
+    "Delhi",
+    "Hyderabad",
+    "Kolkata"
+  ],
+  "interval": {
+    "type": "quantile 10/90 plus normalized conformal",
+    "nominal": 0.8,
+    "qn_by_city": {
+      "Delhi": 0.1662282132345977,
+      "Hyderabad": 0.0167592911811136,
+      "Kolkata": 0.031928851498634704
+    },
+    "width_offset": 1.0,
+    "rule": "lo = max(0, lo_raw - qn*(hi_raw-lo_raw+1)); hi = hi_raw + qn*(hi_raw-lo_raw+1)"
+  },
+  "forecast_weather": "day-2 previous-run forecast features",
+  "train_rows": 27068,
+  "train_from": "2025-02-27 01:00:00",
+  "train_to": "2026-10-02 13:00:00",
+  "iterations": {
+    "point": {
+      "early_stop_best": 201,
+      "refit_trees": 221
+    },
+    "q10": {
+      "early_stop_best": 230,
+      "refit_trees": 253
+    },
+    "q90": {
+      "early_stop_best": 258,
+      "refit_trees": 283
+    }
+  },
+  "lightgbm_version": "4.7.0",
+  "limits": [
+    "gain over same-as-yesterday is small and Delhi-specific",
+    "intervals are weaker in autumn and on high-pollution hours",
+    "Hyderabad has too few hours above 60 to evaluate warnings"
+  ]
+}
