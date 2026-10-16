@@ -191,23 +191,23 @@ def add_forecast_features(features: pd.DataFrame, forecast_day2: pd.DataFrame) -
 
 
 def latest_feature_rows(features: pd.DataFrame, now_ist, max_age_hours: float = 6.0) -> pd.DataFrame:
-    """The newest row per city that has every model input, plus how old it is.
+    """The newest hour per city, if it has every model input, plus how old it is.
 
-    A city is missing from the result when no row is complete, for example when
-    less than a week of unbroken history exists. Callers must handle that case.
+    Only the newest hour counts. If that hour is incomplete (for example because a gap of
+    more than 3 hours left less than a week of unbroken history) the city is left out,
+    even when older hours were complete: a forecast built from old data would answer
+    a question about a time that has already passed.
     """
     rows = []
     for city, g in features.groupby("city"):
-        g = g.sort_values("hour_ist")
-        g = g[g[FEATURES].notna().all(axis=1)]
-        if g.empty:
+        last = g.sort_values("hour_ist").iloc[[-1]].copy()
+        if not last[FEATURES].notna().to_numpy().all():
             continue
-        last = g.iloc[-1].copy()
         last["age_hours"] = (pd.Timestamp(now_ist) - last["hour_ist"]) / pd.Timedelta(hours=1)
-        last["is_stale"] = bool(last["age_hours"] > max_age_hours)
+        last["is_stale"] = last["age_hours"] > max_age_hours
         rows.append(last)
     if not rows:
         return pd.DataFrame()
-    out = pd.DataFrame(rows).reset_index(drop=True)
+    out = pd.concat(rows, ignore_index=True)
     out["city_code"] = pd.Categorical(out["city"], categories=CITIES)
     return out
