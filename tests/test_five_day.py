@@ -157,13 +157,14 @@ def table():
 
 
 # ------------------------------------------------------------------- the maths
-def test_model_cities_use_the_log_ratio_model_and_hyderabad_the_baseline(env, table):
+def test_model_cities_use_the_log_ratio_model_and_hyderabad_the_recent_average(env, table):
     m = D.FiveDayModel(env["models"])
     fc = m.point_forecast(table)
     x = D.add_extra(table)
     hy = fc["city"] == "Hyderabad"
-    assert (fc.loc[hy, "method"] == "seasonal_baseline").all() and (fc.loc[~hy, "method"] == "model").all()
-    assert np.allclose(fc.loc[hy, "fc"].to_numpy(), x.loc[hy.to_numpy(), "base_seasonal"].to_numpy())
+    assert (fc.loc[hy, "method"] == "recent_average").all() and (fc.loc[~hy, "method"] == "model").all()
+    assert np.allclose(fc.loc[hy, "fc"].to_numpy(), x.loc[hy.to_numpy(), "base_mean24"].to_numpy())
+    assert fc.loc[hy, "fc"].nunique() == 1                      # held flat across all 120 hours
     # Delhi and Kolkata: forecast = expm1(log1p(mean24) + model output), never below zero
     xm = x[~hy.to_numpy()]
     M = xm[[c for c in D.FEATS if c != "city_code"]].astype(float)
@@ -227,7 +228,7 @@ def test_healthy_run_gives_five_days_for_every_city(env):
         assert all(d["low"] <= d["forecast"] <= d["high"] for d in c["daily"])
         assert all(h["low"] <= h["forecast"] <= h["high"] for h in c["hourly"])
         assert c["as_of_ist"] == "2026-10-15T16:00" and c["age_hours"] == 1.5
-    assert res["cities"]["Delhi"]["method"] == "model" and res["cities"]["Hyderabad"]["method"] == "seasonal_baseline"
+    assert res["cities"]["Delhi"]["method"] == "model" and res["cities"]["Hyderabad"]["method"] == "recent_average"
     on_disk = json.loads((env["out"] / "latest.json").read_text())
     assert on_disk["cities"]["Delhi"]["status"] == "ok" and on_disk["limits"] == D.LIMITS
 
