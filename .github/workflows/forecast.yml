@@ -24,7 +24,7 @@ jobs:
       - name: Run forecast
         env:
           OPENAQ_API_KEY: ${{ secrets.OPENAQ_API_KEY }}
-        run: python -m airwise.pipeline
+        run: python -m airwise.five_day
       - name: Save results
         run: |
           git config user.name "airwise-bot"
