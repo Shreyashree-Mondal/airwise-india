@@ -7,8 +7,9 @@ Reads the OpenAQ key from the environment variable OPENAQ_API_KEY.
 How the forecast is made
     * Delhi and Kolkata: a LightGBM model (models/horizon_model_v4.txt) predicts a log-ratio against the average
       of the last 24 hours, for every hour ahead h = 1..120.
-    * Hyderabad: the model did not beat a simple baseline, so the forecast is the seasonal baseline (the value at
-      the same hour of day in the most recent 24 hours).
+    * Hyderabad: the model did not beat a simple baseline, so the forecast is that baseline: the average of the last
+      24 hours, held flat. (The "same hour as yesterday" baseline gives the same daily averages but is 10-13% worse
+      on individual hours.)
     * Ranges: forecast x multipliers per city and day ahead (models/horizon_calibration.json), learned from how far
       past forecasts were off. Hourly and daily-average ranges have their own multipliers.
 
@@ -37,7 +38,7 @@ from airwise import horizons as H
 from airwise.data_sources import (CITY_COORDS, HISTORY_DAYS, OPEN_METEO_PREVIOUS_RUNS_URL, FetchError,
                                   _hourly_frame, _request, fetch_all_sensors, fetch_observed_weather, load_sensors)
 
-MODEL_CITIES = ("Delhi", "Kolkata")      # everyone else uses the seasonal baseline
+MODEL_CITIES = ("Delhi", "Kolkata")      # everyone else uses the recent-average baseline
 MAX_AGE_HOURS = 6.0
 MIN_HOURS_PER_DAY = 18                   # a 24-hour window needs this many forecast hours, and this many still ahead
 EXTRA = ["seas", "mean24", "seas_minus_cur", "seas_minus_mean24", "cur_minus_mean24"]
@@ -46,7 +47,7 @@ FEATS = H.H_FEATURES + EXTRA
 LIMITS = [
     "Forecasts show a typical value; on polluted days the real value is often higher.",
     "Ranges covered roughly 8 in 10 outcomes in past tests overall, but less in some stretches, autumn especially.",
-    "Hyderabad uses a simple baseline, because the model did not beat it.",
+    "Hyderabad shows the average of the last 24 hours held flat, because the model did not beat it.",
     "The model's edge over simple baselines is modest and was measured on about one year of data.",
 ]
 
@@ -89,9 +90,9 @@ class FiveDayModel:
         out = self.booster.predict(m)
         model_fc = np.clip(np.expm1(np.log1p(x["base_mean24"].to_numpy(float)) + out), 0, None)
         use_model = x["city"].isin(MODEL_CITIES).to_numpy()
-        fc = np.where(use_model, model_fc, x["base_seasonal"].to_numpy(float))
+        fc = np.where(use_model, model_fc, x["base_mean24"].to_numpy(float))
         return pd.DataFrame({"city": x["city"].to_numpy(), "h": x["h"].to_numpy(), "target_time": x["target_time"].to_numpy(),
-                             "fc": fc, "method": np.where(use_model, "model", "seasonal_baseline")})
+                             "fc": fc, "method": np.where(use_model, "model", "recent_average")})
 
     def hourly_ranges(self, fc: pd.DataFrame) -> pd.DataFrame:
         out = fc.copy()
@@ -189,7 +190,7 @@ def run(sensors_path, models_dir, out_dir, api_key, now_utc=None, session=None, 
     with_data = (raw.dropna(subset=["pm25"]).groupby("city")["sensor_id"].nunique().to_dict() if len(raw) else {})
     cities = {}
     for city in F.CITIES:
-        info = {"method": "model" if city in MODEL_CITIES else "seasonal_baseline",
+        info = {"method": "model" if city in MODEL_CITIES else "recent_average",
                 "range_level": model.calib["levels"].get(city),
                 "sensors_requested": int(requested.get(city, 0)), "sensors_with_data": int(with_data.get(city, 0))}
         city_daily = daily[daily["city"] == city] if len(daily) else daily
