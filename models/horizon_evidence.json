@@ -1,0 +1,684 @@
+{
+ "hourly_skill": [
+  {
+   "city": "All",
+   "day": 1,
+   "rows": 173445,
+   "model_MAE": 12.3005,
+   "best_base_MAE": 12.6218004227,
+   "best_baseline": "base_seasonal",
+   "skill_pct": 2.5459,
+   "ci_low": -3.471,
+   "ci_high": 8.2586
+  },
+  {
+   "city": "All",
+   "day": 2,
+   "rows": 171949,
+   "model_MAE": 14.1433,
+   "best_base_MAE": 15.1211004257,
+   "best_baseline": "base_mean24",
+   "skill_pct": 6.4666,
+   "ci_low": 2.6701,
+   "ci_high": 11.2008
+  },
+  {
+   "city": "All",
+   "day": 3,
+   "rows": 170501,
+   "model_MAE": 14.9529,
+   "best_base_MAE": 16.0981998444,
+   "best_baseline": "base_mean24",
+   "skill_pct": 7.115,
+   "ci_low": 2.2255,
+   "ci_high": 11.8515
+  },
+  {
+   "city": "All",
+   "day": 4,
+   "rows": 169382,
+   "model_MAE": 15.4286,
+   "best_base_MAE": 16.7525005341,
+   "best_baseline": "base_mean24",
+   "skill_pct": 7.9029,
+   "ci_low": 3.4453,
+   "ci_high": 12.7858
+  },
+  {
+   "city": "All",
+   "day": 5,
+   "rows": 168590,
+   "model_MAE": 15.7041,
+   "best_base_MAE": 17.1902008057,
+   "best_baseline": "base_mean24",
+   "skill_pct": 8.6454,
+   "ci_low": 3.3914,
+   "ci_high": 14.399
+  },
+  {
+   "city": "Delhi",
+   "day": 1,
+   "rows": 60228,
+   "model_MAE": 23.3407,
+   "best_base_MAE": 24.2513008118,
+   "best_baseline": "base_seasonal",
+   "skill_pct": 3.7548,
+   "ci_low": -3.4766,
+   "ci_high": 10.9965
+  },
+  {
+   "city": "Delhi",
+   "day": 2,
+   "rows": 59578,
+   "model_MAE": 26.791,
+   "best_base_MAE": 29.1681995392,
+   "best_baseline": "base_mean24",
+   "skill_pct": 8.1501,
+   "ci_low": 2.9181,
+   "ci_high": 13.5662
+  },
+  {
+   "city": "Delhi",
+   "day": 3,
+   "rows": 59041,
+   "model_MAE": 28.0837,
+   "best_base_MAE": 30.8756999969,
+   "best_baseline": "base_mean24",
+   "skill_pct": 9.0426,
+   "ci_low": 1.5392,
+   "ci_high": 16.3578
+  },
+  {
+   "city": "Delhi",
+   "day": 4,
+   "rows": 58683,
+   "model_MAE": 28.8943,
+   "best_base_MAE": 32.2225990295,
+   "best_baseline": "base_mean24",
+   "skill_pct": 10.3291,
+   "ci_low": 3.3845,
+   "ci_high": 17.24
+  },
+  {
+   "city": "Delhi",
+   "day": 5,
+   "rows": 58416,
+   "model_MAE": 29.7235,
+   "best_base_MAE": 33.4211997986,
+   "best_baseline": "base_mean24",
+   "skill_pct": 11.064,
+   "ci_low": 3.2816,
+   "ci_high": 19.19
+  },
+  {
+   "city": "Hyderabad",
+   "day": 1,
+   "rows": 55901,
+   "model_MAE": 3.5981,
+   "best_base_MAE": 3.1865999699,
+   "best_baseline": "base_mean24",
+   "skill_pct": -12.9135,
+   "ci_low": -15.7683,
+   "ci_high": -10.1369
+  },
+  {
+   "city": "Hyderabad",
+   "day": 2,
+   "rows": 55562,
+   "model_MAE": 3.8904,
+   "best_base_MAE": 3.435199976,
+   "best_baseline": "base_mean24",
+   "skill_pct": -13.2503,
+   "ci_low": -16.2278,
+   "ci_high": -10.0171
+  },
+  {
+   "city": "Hyderabad",
+   "day": 3,
+   "rows": 55204,
+   "model_MAE": 3.9538,
+   "best_base_MAE": 3.5069000721,
+   "best_baseline": "base_mean24",
+   "skill_pct": -12.7425,
+   "ci_low": -16.0163,
+   "ci_high": -9.6937
+  },
+  {
+   "city": "Hyderabad",
+   "day": 4,
+   "rows": 54860,
+   "model_MAE": 4.1128,
+   "best_base_MAE": 3.6998000145,
+   "best_baseline": "base_mean24",
+   "skill_pct": -11.1615,
+   "ci_low": -13.829,
+   "ci_high": -8.835
+  },
+  {
+   "city": "Hyderabad",
+   "day": 5,
+   "rows": 54605,
+   "model_MAE": 4.1404,
+   "best_base_MAE": 3.7411999702,
+   "best_baseline": "base_mean24",
+   "skill_pct": -10.6681,
+   "ci_low": -13.9668,
+   "ci_high": -7.9173
+  },
+  {
+   "city": "Kolkata",
+   "day": 1,
+   "rows": 57316,
+   "model_MAE": 9.1868,
+   "best_base_MAE": 9.2024002075,
+   "best_baseline": "base_seasonal",
+   "skill_pct": 0.1693,
+   "ci_low": -8.5116,
+   "ci_high": 8.1645
+  },
+  {
+   "city": "Kolkata",
+   "day": 2,
+   "rows": 56809,
+   "model_MAE": 10.907,
+   "best_base_MAE": 11.8186998367,
+   "best_baseline": "base_mean24",
+   "skill_pct": 7.7146,
+   "ci_low": 3.3323,
+   "ci_high": 11.9929
+  },
+  {
+   "city": "Kolkata",
+   "day": 3,
+   "rows": 56256,
+   "model_MAE": 11.9654,
+   "best_base_MAE": 12.9450998306,
+   "best_baseline": "base_mean24",
+   "skill_pct": 7.5686,
+   "ci_low": 2.3461,
+   "ci_high": 12.8215
+  },
+  {
+   "city": "Kolkata",
+   "day": 4,
+   "rows": 55839,
+   "model_MAE": 12.3944,
+   "best_base_MAE": 13.3014001846,
+   "best_baseline": "base_seasonal",
+   "skill_pct": 6.8182,
+   "ci_low": 1.0114,
+   "ci_high": 12.7493
+  },
+  {
+   "city": "Kolkata",
+   "day": 5,
+   "rows": 55569,
+   "model_MAE": 12.3295,
+   "best_base_MAE": 13.2707996368,
+   "best_baseline": "base_seasonal",
+   "skill_pct": 7.0932,
+   "ci_low": 2.0343,
+   "ci_high": 12.6641
+  }
+ ],
+ "daily_skill": [
+  {
+   "city": "All",
+   "day": 1,
+   "rows": 7198,
+   "model_MAE": 9.0533,
+   "best_base_MAE": 8.5631999969,
+   "best_baseline": "base_seasonal",
+   "skill_pct": -5.7233,
+   "ci_low": -13.7671,
+   "ci_high": 1.8498
+  },
+  {
+   "city": "All",
+   "day": 2,
+   "rows": 7130,
+   "model_MAE": 11.2246,
+   "best_base_MAE": 11.589799881,
+   "best_baseline": "base_seasonal",
+   "skill_pct": 3.1507,
+   "ci_low": -3.638,
+   "ci_high": 9.6992
+  },
+  {
+   "city": "All",
+   "day": 3,
+   "rows": 7047,
+   "model_MAE": 12.0585,
+   "best_base_MAE": 12.7948999405,
+   "best_baseline": "base_mean24",
+   "skill_pct": 5.7555,
+   "ci_low": -2.5339,
+   "ci_high": 14.2404
+  },
+  {
+   "city": "All",
+   "day": 4,
+   "rows": 6987,
+   "model_MAE": 12.5795,
+   "best_base_MAE": 13.4951000214,
+   "best_baseline": "base_seasonal",
+   "skill_pct": 6.785,
+   "ci_low": -0.5096,
+   "ci_high": 14.0384
+  },
+  {
+   "city": "All",
+   "day": 5,
+   "rows": 6949,
+   "model_MAE": 12.8691,
+   "best_base_MAE": 13.8624000549,
+   "best_baseline": "base_mean24",
+   "skill_pct": 7.1655,
+   "ci_low": -0.6726,
+   "ci_high": 15.071
+  },
+  {
+   "city": "Delhi",
+   "day": 1,
+   "rows": 2497,
+   "model_MAE": 17.6393,
+   "best_base_MAE": 16.760799408,
+   "best_baseline": "base_seasonal",
+   "skill_pct": -5.2412,
+   "ci_low": -15.0313,
+   "ci_high": 3.4236
+  },
+  {
+   "city": "Delhi",
+   "day": 2,
+   "rows": 2465,
+   "model_MAE": 21.5686,
+   "best_base_MAE": 22.3607997894,
+   "best_baseline": "base_seasonal",
+   "skill_pct": 3.5431,
+   "ci_low": -3.7518,
+   "ci_high": 11.4854
+  },
+  {
+   "city": "Delhi",
+   "day": 3,
+   "rows": 2436,
+   "model_MAE": 22.752,
+   "best_base_MAE": 24.5323009491,
+   "best_baseline": "base_mean24",
+   "skill_pct": 7.2571,
+   "ci_low": -3.8943,
+   "ci_high": 18.7715
+  },
+  {
+   "city": "Delhi",
+   "day": 4,
+   "rows": 2417,
+   "model_MAE": 23.6402,
+   "best_base_MAE": 26.0785007477,
+   "best_baseline": "base_seasonal",
+   "skill_pct": 9.3498,
+   "ci_low": -0.875,
+   "ci_high": 20.74
+  },
+  {
+   "city": "Delhi",
+   "day": 5,
+   "rows": 2404,
+   "model_MAE": 24.5561,
+   "best_base_MAE": 27.1646003723,
+   "best_baseline": "base_seasonal",
+   "skill_pct": 9.6024,
+   "ci_low": -1.1531,
+   "ci_high": 21.0451
+  },
+  {
+   "city": "Hyderabad",
+   "day": 1,
+   "rows": 2322,
+   "model_MAE": 1.9381,
+   "best_base_MAE": 1.9380999804,
+   "best_baseline": "base_seasonal",
+   "skill_pct": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0
+  },
+  {
+   "city": "Hyderabad",
+   "day": 2,
+   "rows": 2307,
+   "model_MAE": 2.2855,
+   "best_base_MAE": 2.2850000858,
+   "best_baseline": "base_mean24",
+   "skill_pct": -0.0225,
+   "ci_low": -0.223,
+   "ci_high": 0.2131
+  },
+  {
+   "city": "Hyderabad",
+   "day": 3,
+   "rows": 2284,
+   "model_MAE": 2.434,
+   "best_base_MAE": 2.431499958,
+   "best_baseline": "base_mean24",
+   "skill_pct": -0.1019,
+   "ci_low": -0.4074,
+   "ci_high": 0.1353
+  },
+  {
+   "city": "Hyderabad",
+   "day": 4,
+   "rows": 2267,
+   "model_MAE": 2.7185,
+   "best_base_MAE": 2.7184998989,
+   "best_baseline": "base_seasonal",
+   "skill_pct": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0
+  },
+  {
+   "city": "Hyderabad",
+   "day": 5,
+   "rows": 2255,
+   "model_MAE": 2.7658,
+   "best_base_MAE": 2.7641999722,
+   "best_baseline": "base_mean24",
+   "skill_pct": -0.0593,
+   "ci_low": -0.3552,
+   "ci_high": 0.2563
+  },
+  {
+   "city": "Kolkata",
+   "day": 1,
+   "rows": 2379,
+   "model_MAE": 6.9861,
+   "best_base_MAE": 6.4253001213,
+   "best_baseline": "base_seasonal",
+   "skill_pct": -8.7284,
+   "ci_low": -24.7653,
+   "ci_high": 5.2305
+  },
+  {
+   "city": "Kolkata",
+   "day": 2,
+   "rows": 2358,
+   "model_MAE": 9.1571,
+   "best_base_MAE": 9.4282999039,
+   "best_baseline": "base_mean24",
+   "skill_pct": 2.8765,
+   "ci_low": -6.3602,
+   "ci_high": 10.7421
+  },
+  {
+   "city": "Kolkata",
+   "day": 3,
+   "rows": 2327,
+   "model_MAE": 10.3108,
+   "best_base_MAE": 10.6796998978,
+   "best_baseline": "base_mean24",
+   "skill_pct": 3.4538,
+   "ci_low": -5.1136,
+   "ci_high": 11.4027
+  },
+  {
+   "city": "Kolkata",
+   "day": 4,
+   "rows": 2303,
+   "model_MAE": 10.678,
+   "best_base_MAE": 10.8954000473,
+   "best_baseline": "base_mean24",
+   "skill_pct": 1.9946,
+   "ci_low": -7.1651,
+   "ci_high": 10.4013
+  },
+  {
+   "city": "Kolkata",
+   "day": 5,
+   "rows": 2290,
+   "model_MAE": 10.549,
+   "best_base_MAE": 10.8115997314,
+   "best_baseline": "base_mean24",
+   "skill_pct": 2.4286,
+   "ci_low": -7.3456,
+   "ci_high": 11.6753
+  }
+ ],
+ "category": [
+  {
+   "city": "All",
+   "day": 1,
+   "days_scored": 7198,
+   "model_correct": 0.7858,
+   "baseline_correct": 0.7791,
+   "best_baseline": "base_seasonal",
+   "model_within_one": 0.9908
+  },
+  {
+   "city": "All",
+   "day": 2,
+   "days_scored": 7130,
+   "model_correct": 0.74,
+   "baseline_correct": 0.722,
+   "best_baseline": "base_seasonal",
+   "model_within_one": 0.9829
+  },
+  {
+   "city": "All",
+   "day": 3,
+   "days_scored": 7047,
+   "model_correct": 0.7162,
+   "baseline_correct": 0.7014,
+   "best_baseline": "base_mean24",
+   "model_within_one": 0.9762
+  },
+  {
+   "city": "All",
+   "day": 4,
+   "days_scored": 6987,
+   "model_correct": 0.6989,
+   "baseline_correct": 0.6863,
+   "best_baseline": "base_seasonal",
+   "model_within_one": 0.9708
+  },
+  {
+   "city": "All",
+   "day": 5,
+   "days_scored": 6949,
+   "model_correct": 0.6883,
+   "baseline_correct": 0.6768,
+   "best_baseline": "base_mean24",
+   "model_within_one": 0.967
+  },
+  {
+   "city": "Delhi",
+   "day": 1,
+   "days_scored": 2497,
+   "model_correct": 0.6796,
+   "baseline_correct": 0.6576,
+   "best_baseline": "base_seasonal",
+   "model_within_one": 0.9816
+  },
+  {
+   "city": "Delhi",
+   "day": 2,
+   "days_scored": 2465,
+   "model_correct": 0.6122,
+   "baseline_correct": 0.5696,
+   "best_baseline": "base_seasonal",
+   "model_within_one": 0.9675
+  },
+  {
+   "city": "Delhi",
+   "day": 3,
+   "days_scored": 2436,
+   "model_correct": 0.5661,
+   "baseline_correct": 0.5374,
+   "best_baseline": "base_mean24",
+   "model_within_one": 0.952
+  },
+  {
+   "city": "Delhi",
+   "day": 4,
+   "days_scored": 2417,
+   "model_correct": 0.5482,
+   "baseline_correct": 0.5019,
+   "best_baseline": "base_seasonal",
+   "model_within_one": 0.9379
+  },
+  {
+   "city": "Delhi",
+   "day": 5,
+   "days_scored": 2404,
+   "model_correct": 0.5191,
+   "baseline_correct": 0.4821,
+   "best_baseline": "base_seasonal",
+   "model_within_one": 0.9301
+  },
+  {
+   "city": "Hyderabad",
+   "day": 1,
+   "days_scored": 2322,
+   "model_correct": 0.8807,
+   "baseline_correct": 0.8807,
+   "best_baseline": "base_seasonal",
+   "model_within_one": 1.0
+  },
+  {
+   "city": "Hyderabad",
+   "day": 2,
+   "days_scored": 2307,
+   "model_correct": 0.8713,
+   "baseline_correct": 0.8704,
+   "best_baseline": "base_mean24",
+   "model_within_one": 1.0
+  },
+  {
+   "city": "Hyderabad",
+   "day": 3,
+   "days_scored": 2284,
+   "model_correct": 0.8704,
+   "baseline_correct": 0.87,
+   "best_baseline": "base_mean24",
+   "model_within_one": 1.0
+  },
+  {
+   "city": "Hyderabad",
+   "day": 4,
+   "days_scored": 2267,
+   "model_correct": 0.839,
+   "baseline_correct": 0.839,
+   "best_baseline": "base_seasonal",
+   "model_within_one": 1.0
+  },
+  {
+   "city": "Hyderabad",
+   "day": 5,
+   "days_scored": 2255,
+   "model_correct": 0.8377,
+   "baseline_correct": 0.8368,
+   "best_baseline": "base_mean24",
+   "model_within_one": 1.0
+  },
+  {
+   "city": "Kolkata",
+   "day": 1,
+   "days_scored": 2379,
+   "model_correct": 0.8045,
+   "baseline_correct": 0.8075,
+   "best_baseline": "base_seasonal",
+   "model_within_one": 0.9916
+  },
+  {
+   "city": "Kolkata",
+   "day": 2,
+   "days_scored": 2358,
+   "model_correct": 0.7451,
+   "baseline_correct": 0.7345,
+   "best_baseline": "base_mean24",
+   "model_within_one": 0.9822
+  },
+  {
+   "city": "Kolkata",
+   "day": 3,
+   "days_scored": 2327,
+   "model_correct": 0.722,
+   "baseline_correct": 0.7078,
+   "best_baseline": "base_mean24",
+   "model_within_one": 0.9781
+  },
+  {
+   "city": "Kolkata",
+   "day": 4,
+   "days_scored": 2303,
+   "model_correct": 0.7191,
+   "baseline_correct": 0.7304,
+   "best_baseline": "base_mean24",
+   "model_within_one": 0.9766
+  },
+  {
+   "city": "Kolkata",
+   "day": 5,
+   "days_scored": 2290,
+   "model_correct": 0.7188,
+   "baseline_correct": 0.7231,
+   "best_baseline": "base_mean24",
+   "model_within_one": 0.9734
+  }
+ ],
+ "coverage_hourly": {
+  "Delhi": {
+   "1": 0.795,
+   "2": 0.804,
+   "3": 0.786,
+   "4": 0.777,
+   "5": 0.765
+  },
+  "Hyderabad": {
+   "1": 0.838,
+   "2": 0.848,
+   "3": 0.86,
+   "4": 0.847,
+   "5": 0.856
+  },
+  "Kolkata": {
+   "1": 0.863,
+   "2": 0.854,
+   "3": 0.831,
+   "4": 0.824,
+   "5": 0.837
+  }
+ },
+ "coverage_daily": {
+  "Delhi": {
+   "1": 0.784,
+   "2": 0.802,
+   "3": 0.773,
+   "4": 0.784,
+   "5": 0.754
+  },
+  "Hyderabad": {
+   "1": 0.818,
+   "2": 0.831,
+   "3": 0.843,
+   "4": 0.842,
+   "5": 0.856
+  },
+  "Kolkata": {
+   "1": 0.843,
+   "2": 0.839,
+   "3": 0.797,
+   "4": 0.791,
+   "5": 0.827
+  }
+ },
+ "coverage_by_block_daily": {
+  "1": 0.604,
+  "2": 0.846,
+  "3": 0.969,
+  "4": 0.923,
+  "5": 0.861,
+  "6": 0.831,
+  "7": 0.727
+ },
+ "blocks": "8 rolling test blocks, Jul 2025 to early Oct 2026; ranges learned from earlier blocks only"
+}

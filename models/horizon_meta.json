@@ -1,0 +1,200 @@
+{
+ "model": "log-ratio LightGBM, forecast = (1+mean24)*exp(output) - 1",
+ "features": [
+  "pm25",
+  "lag_1",
+  "lag_2",
+  "lag_3",
+  "lag_6",
+  "lag_12",
+  "lag_24",
+  "lag_48",
+  "lag_144",
+  "lag_168",
+  "roll_mean_6",
+  "roll_mean_24",
+  "roll_std_24",
+  "diff_1",
+  "diff_6",
+  "precip_24h",
+  "temperature_2m",
+  "relative_humidity_2m",
+  "dew_point_2m",
+  "wind_speed_10m",
+  "precipitation",
+  "surface_pressure",
+  "cloud_cover",
+  "wind_dir_sin",
+  "wind_dir_cos",
+  "hour_sin",
+  "hour_cos",
+  "dow",
+  "city_code",
+  "h",
+  "tgt_hour_sin",
+  "tgt_hour_cos",
+  "tgt_dow",
+  "fc_temp",
+  "fc_rh",
+  "fc_wind",
+  "fc_prec",
+  "fc_pres",
+  "fc_dtemp",
+  "fc_dwind",
+  "fc_dpres",
+  "fc_drh",
+  "seas",
+  "mean24",
+  "seas_minus_cur",
+  "seas_minus_mean24",
+  "cur_minus_mean24"
+ ],
+ "trees": 225,
+ "train_rows": 1097433,
+ "train_origins_to": "2026-10-02 13:00:00",
+ "hyderabad": "seasonal baseline (same hour as in the last 24 h); the model did not beat it",
+ "calibration": {
+  "levels": {
+   "Delhi": 0.8,
+   "Kolkata": 0.9,
+   "Hyderabad": 0.9
+  },
+  "hourly": {
+   "Delhi": {
+    "1": [
+     0.6088,
+     1.6654
+    ],
+    "2": [
+     0.5733,
+     1.7912
+    ],
+    "3": [
+     0.5544,
+     1.8254
+    ],
+    "4": [
+     0.5465,
+     1.8858
+    ],
+    "5": [
+     0.5384,
+     1.9418
+    ]
+   },
+   "Hyderabad": {
+    "1": [
+     0.7565,
+     1.3143
+    ],
+    "2": [
+     0.744,
+     1.3416
+    ],
+    "3": [
+     0.7405,
+     1.3586
+    ],
+    "4": [
+     0.7333,
+     1.3727
+    ],
+    "5": [
+     0.7244,
+     1.3633
+    ]
+   },
+   "Kolkata": {
+    "1": [
+     0.6301,
+     1.722
+    ],
+    "2": [
+     0.5699,
+     1.8966
+    ],
+    "3": [
+     0.5384,
+     2.0063
+    ],
+    "4": [
+     0.5406,
+     2.0644
+    ],
+    "5": [
+     0.5417,
+     2.1189
+    ]
+   }
+  },
+  "daily": {
+   "Delhi": {
+    "1": [
+     0.7407,
+     1.4788
+    ],
+    "2": [
+     0.6985,
+     1.6157
+    ],
+    "3": [
+     0.6644,
+     1.6575
+    ],
+    "4": [
+     0.6646,
+     1.6983
+    ],
+    "5": [
+     0.6414,
+     1.7546
+    ]
+   },
+   "Hyderabad": {
+    "1": [
+     0.8636,
+     1.1521
+    ],
+    "2": [
+     0.8377,
+     1.1901
+    ],
+    "3": [
+     0.8296,
+     1.1992
+    ],
+    "4": [
+     0.8176,
+     1.2097
+    ],
+    "5": [
+     0.8058,
+     1.2214
+    ]
+   },
+   "Kolkata": {
+    "1": [
+     0.7063,
+     1.552
+    ],
+    "2": [
+     0.6541,
+     1.7329
+    ],
+    "3": [
+     0.5965,
+     1.8256
+    ],
+    "4": [
+     0.5978,
+     1.8969
+    ],
+    "5": [
+     0.5895,
+     2.0285
+    ]
+   }
+  },
+  "rule": "range = forecast x [q_lo, q_hi]; Delhi and Kolkata use the model, Hyderabad the seasonal baseline"
+ }
+}
