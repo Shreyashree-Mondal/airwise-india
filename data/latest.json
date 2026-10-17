@@ -1,41 +1,753 @@
 {
-  "generated_at_utc": "2026-10-16T04:36:35Z",
-  "horizon_hours": 24,
-  "interval_nominal": 0.8,
-  "model_trained_through": "2026-10-02 13:00:00",
-  "cities": {
-    "Delhi": {
-      "sensors_requested": 39,
-      "sensors_with_data": 39,
-      "as_of_ist": "2026-10-13T23:00",
-      "age_hours": 59.1,
-      "current_pm25": 116.0,
-      "sensors_in_latest_hour": 37,
-      "status": "outdated"
+ "schema": 2,
+ "generated_at_utc": "2026-10-17T05:08:08Z",
+ "horizon_hours": 120,
+ "model_trained_through": "2026-10-02 13:00:00",
+ "cities": {
+  "Delhi": {
+   "method": "model",
+   "range_level": 0.8,
+   "sensors_requested": 39,
+   "sensors_with_data": 39,
+   "as_of_ist": "2026-10-13T23:00",
+   "age_hours": 83.6,
+   "current_pm25": 116.0,
+   "sensors_in_latest_hour": 37,
+   "status": "stale",
+   "hourly": [
+    {
+     "t": "2026-10-17T11:00",
+     "forecast": 65.4,
+     "low": 35.8,
+     "high": 123.4
     },
-    "Hyderabad": {
-      "sensors_requested": 9,
-      "sensors_with_data": 9,
-      "as_of_ist": "2026-10-13T23:00",
-      "age_hours": 59.1,
-      "current_pm25": 38.2,
-      "sensors_in_latest_hour": 8,
-      "status": "outdated"
+    {
+     "t": "2026-10-17T12:00",
+     "forecast": 66.6,
+     "low": 36.4,
+     "high": 125.6
     },
-    "Kolkata": {
-      "sensors_requested": 9,
-      "sensors_with_data": 9,
-      "as_of_ist": "2026-10-13T23:00",
-      "age_hours": 59.1,
-      "current_pm25": 64.2,
-      "sensors_in_latest_hour": 9,
-      "status": "outdated"
+    {
+     "t": "2026-10-17T13:00",
+     "forecast": 56.8,
+     "low": 31.0,
+     "high": 107.1
+    },
+    {
+     "t": "2026-10-17T14:00",
+     "forecast": 53.1,
+     "low": 29.0,
+     "high": 100.2
+    },
+    {
+     "t": "2026-10-17T15:00",
+     "forecast": 51.1,
+     "low": 27.9,
+     "high": 96.4
+    },
+    {
+     "t": "2026-10-17T16:00",
+     "forecast": 48.3,
+     "low": 26.4,
+     "high": 91.0
+    },
+    {
+     "t": "2026-10-17T17:00",
+     "forecast": 47.2,
+     "low": 25.8,
+     "high": 89.1
+    },
+    {
+     "t": "2026-10-17T18:00",
+     "forecast": 55.0,
+     "low": 30.1,
+     "high": 103.8
+    },
+    {
+     "t": "2026-10-17T19:00",
+     "forecast": 69.7,
+     "low": 38.1,
+     "high": 131.4
+    },
+    {
+     "t": "2026-10-17T20:00",
+     "forecast": 80.9,
+     "low": 44.2,
+     "high": 152.6
+    },
+    {
+     "t": "2026-10-17T21:00",
+     "forecast": 91.7,
+     "low": 50.1,
+     "high": 172.9
+    },
+    {
+     "t": "2026-10-17T22:00",
+     "forecast": 97.6,
+     "low": 53.3,
+     "high": 184.1
+    },
+    {
+     "t": "2026-10-17T23:00",
+     "forecast": 96.5,
+     "low": 52.8,
+     "high": 182.0
+    },
+    {
+     "t": "2026-10-18T00:00",
+     "forecast": 95.9,
+     "low": 51.6,
+     "high": 186.2
+    },
+    {
+     "t": "2026-10-18T01:00",
+     "forecast": 92.1,
+     "low": 49.6,
+     "high": 178.9
+    },
+    {
+     "t": "2026-10-18T02:00",
+     "forecast": 87.0,
+     "low": 46.9,
+     "high": 169.0
+    },
+    {
+     "t": "2026-10-18T03:00",
+     "forecast": 86.3,
+     "low": 46.5,
+     "high": 167.6
+    },
+    {
+     "t": "2026-10-18T04:00",
+     "forecast": 83.1,
+     "low": 44.7,
+     "high": 161.3
+    },
+    {
+     "t": "2026-10-18T05:00",
+     "forecast": 83.2,
+     "low": 44.8,
+     "high": 161.6
+    },
+    {
+     "t": "2026-10-18T06:00",
+     "forecast": 81.4,
+     "low": 43.8,
+     "high": 158.0
+    },
+    {
+     "t": "2026-10-18T07:00",
+     "forecast": 80.5,
+     "low": 43.4,
+     "high": 156.4
+    },
+    {
+     "t": "2026-10-18T08:00",
+     "forecast": 80.0,
+     "low": 43.1,
+     "high": 155.3
+    },
+    {
+     "t": "2026-10-18T09:00",
+     "forecast": 68.3,
+     "low": 36.8,
+     "high": 132.6
+    },
+    {
+     "t": "2026-10-18T10:00",
+     "forecast": 63.5,
+     "low": 34.2,
+     "high": 123.3
+    },
+    {
+     "t": "2026-10-18T11:00",
+     "forecast": 58.3,
+     "low": 31.4,
+     "high": 113.3
+    },
+    {
+     "t": "2026-10-18T12:00",
+     "forecast": 58.3,
+     "low": 31.4,
+     "high": 113.3
+    },
+    {
+     "t": "2026-10-18T13:00",
+     "forecast": 53.6,
+     "low": 28.9,
+     "high": 104.1
+    },
+    {
+     "t": "2026-10-18T14:00",
+     "forecast": 48.9,
+     "low": 26.3,
+     "high": 95.0
+    },
+    {
+     "t": "2026-10-18T15:00",
+     "forecast": 47.9,
+     "low": 25.8,
+     "high": 93.1
+    },
+    {
+     "t": "2026-10-18T16:00",
+     "forecast": 46.3,
+     "low": 24.9,
+     "high": 89.9
+    },
+    {
+     "t": "2026-10-18T17:00",
+     "forecast": 45.4,
+     "low": 24.5,
+     "high": 88.2
+    },
+    {
+     "t": "2026-10-18T18:00",
+     "forecast": 52.1,
+     "low": 28.0,
+     "high": 101.1
+    },
+    {
+     "t": "2026-10-18T19:00",
+     "forecast": 62.4,
+     "low": 33.6,
+     "high": 121.1
+    },
+    {
+     "t": "2026-10-18T20:00",
+     "forecast": 72.3,
+     "low": 38.9,
+     "high": 140.4
+    },
+    {
+     "t": "2026-10-18T21:00",
+     "forecast": 80.1,
+     "low": 43.1,
+     "high": 155.6
+    },
+    {
+     "t": "2026-10-18T22:00",
+     "forecast": 79.5,
+     "low": 42.8,
+     "high": 154.3
+    },
+    {
+     "t": "2026-10-18T23:00",
+     "forecast": 80.7,
+     "low": 43.5,
+     "high": 156.8
     }
+   ],
+   "daily": [
+    {
+     "day": 5,
+     "from": "2026-10-18T00:00",
+     "to": "2026-10-18T23:00",
+     "hours": 24,
+     "forecast": 70.3,
+     "low": 45.1,
+     "high": 123.4
+    }
+   ]
   },
-  "fetch_failures": [],
-  "limits": [
-    "gain over same-as-yesterday is small and Delhi-specific",
-    "intervals are weaker in autumn and on high-pollution hours",
-    "Hyderabad has too few hours above 60 to evaluate warnings"
-  ]
+  "Hyderabad": {
+   "method": "seasonal_baseline",
+   "range_level": 0.9,
+   "sensors_requested": 9,
+   "sensors_with_data": 9,
+   "as_of_ist": "2026-10-13T23:00",
+   "age_hours": 83.6,
+   "current_pm25": 38.2,
+   "sensors_in_latest_hour": 8,
+   "status": "stale",
+   "hourly": [
+    {
+     "t": "2026-10-17T11:00",
+     "forecast": 31.5,
+     "low": 23.1,
+     "high": 43.2
+    },
+    {
+     "t": "2026-10-17T12:00",
+     "forecast": 32.8,
+     "low": 24.1,
+     "high": 45.0
+    },
+    {
+     "t": "2026-10-17T13:00",
+     "forecast": 28.8,
+     "low": 21.1,
+     "high": 39.5
+    },
+    {
+     "t": "2026-10-17T14:00",
+     "forecast": 31.1,
+     "low": 22.8,
+     "high": 42.7
+    },
+    {
+     "t": "2026-10-17T15:00",
+     "forecast": 30.8,
+     "low": 22.6,
+     "high": 42.3
+    },
+    {
+     "t": "2026-10-17T16:00",
+     "forecast": 35.0,
+     "low": 25.7,
+     "high": 48.0
+    },
+    {
+     "t": "2026-10-17T17:00",
+     "forecast": 31.2,
+     "low": 22.9,
+     "high": 42.8
+    },
+    {
+     "t": "2026-10-17T18:00",
+     "forecast": 32.7,
+     "low": 24.0,
+     "high": 44.9
+    },
+    {
+     "t": "2026-10-17T19:00",
+     "forecast": 36.0,
+     "low": 26.4,
+     "high": 49.4
+    },
+    {
+     "t": "2026-10-17T20:00",
+     "forecast": 38.5,
+     "low": 28.2,
+     "high": 52.8
+    },
+    {
+     "t": "2026-10-17T21:00",
+     "forecast": 34.0,
+     "low": 24.9,
+     "high": 46.7
+    },
+    {
+     "t": "2026-10-17T22:00",
+     "forecast": 34.0,
+     "low": 24.9,
+     "high": 46.7
+    },
+    {
+     "t": "2026-10-17T23:00",
+     "forecast": 38.2,
+     "low": 28.0,
+     "high": 52.4
+    },
+    {
+     "t": "2026-10-18T00:00",
+     "forecast": 35.0,
+     "low": 25.4,
+     "high": 47.7
+    },
+    {
+     "t": "2026-10-18T01:00",
+     "forecast": 30.0,
+     "low": 21.7,
+     "high": 40.9
+    },
+    {
+     "t": "2026-10-18T02:00",
+     "forecast": 33.5,
+     "low": 24.3,
+     "high": 45.7
+    },
+    {
+     "t": "2026-10-18T03:00",
+     "forecast": 31.5,
+     "low": 22.8,
+     "high": 42.9
+    },
+    {
+     "t": "2026-10-18T04:00",
+     "forecast": 28.3,
+     "low": 20.5,
+     "high": 38.6
+    },
+    {
+     "t": "2026-10-18T05:00",
+     "forecast": 29.0,
+     "low": 21.0,
+     "high": 39.5
+    },
+    {
+     "t": "2026-10-18T06:00",
+     "forecast": 27.7,
+     "low": 20.1,
+     "high": 37.8
+    },
+    {
+     "t": "2026-10-18T07:00",
+     "forecast": 31.0,
+     "low": 22.5,
+     "high": 42.3
+    },
+    {
+     "t": "2026-10-18T08:00",
+     "forecast": 30.7,
+     "low": 22.2,
+     "high": 41.9
+    },
+    {
+     "t": "2026-10-18T09:00",
+     "forecast": 30.1,
+     "low": 21.8,
+     "high": 41.0
+    },
+    {
+     "t": "2026-10-18T10:00",
+     "forecast": 31.5,
+     "low": 22.8,
+     "high": 42.9
+    },
+    {
+     "t": "2026-10-18T11:00",
+     "forecast": 31.5,
+     "low": 22.8,
+     "high": 42.9
+    },
+    {
+     "t": "2026-10-18T12:00",
+     "forecast": 32.8,
+     "low": 23.8,
+     "high": 44.7
+    },
+    {
+     "t": "2026-10-18T13:00",
+     "forecast": 28.8,
+     "low": 20.9,
+     "high": 39.3
+    },
+    {
+     "t": "2026-10-18T14:00",
+     "forecast": 31.1,
+     "low": 22.5,
+     "high": 42.4
+    },
+    {
+     "t": "2026-10-18T15:00",
+     "forecast": 30.8,
+     "low": 22.3,
+     "high": 42.0
+    },
+    {
+     "t": "2026-10-18T16:00",
+     "forecast": 35.0,
+     "low": 25.4,
+     "high": 47.7
+    },
+    {
+     "t": "2026-10-18T17:00",
+     "forecast": 31.2,
+     "low": 22.6,
+     "high": 42.5
+    },
+    {
+     "t": "2026-10-18T18:00",
+     "forecast": 32.7,
+     "low": 23.7,
+     "high": 44.6
+    },
+    {
+     "t": "2026-10-18T19:00",
+     "forecast": 36.0,
+     "low": 26.1,
+     "high": 49.1
+    },
+    {
+     "t": "2026-10-18T20:00",
+     "forecast": 38.5,
+     "low": 27.9,
+     "high": 52.5
+    },
+    {
+     "t": "2026-10-18T21:00",
+     "forecast": 34.0,
+     "low": 24.6,
+     "high": 46.4
+    },
+    {
+     "t": "2026-10-18T22:00",
+     "forecast": 34.0,
+     "low": 24.6,
+     "high": 46.4
+    },
+    {
+     "t": "2026-10-18T23:00",
+     "forecast": 38.2,
+     "low": 27.7,
+     "high": 52.1
+    }
+   ],
+   "daily": [
+    {
+     "day": 5,
+     "from": "2026-10-18T00:00",
+     "to": "2026-10-18T23:00",
+     "hours": 24,
+     "forecast": 32.2,
+     "low": 26.0,
+     "high": 39.3
+    }
+   ]
+  },
+  "Kolkata": {
+   "method": "model",
+   "range_level": 0.9,
+   "sensors_requested": 9,
+   "sensors_with_data": 9,
+   "as_of_ist": "2026-10-13T23:00",
+   "age_hours": 83.6,
+   "current_pm25": 64.2,
+   "sensors_in_latest_hour": 9,
+   "status": "stale",
+   "hourly": [
+    {
+     "t": "2026-10-17T11:00",
+     "forecast": 52.1,
+     "low": 28.2,
+     "high": 107.5
+    },
+    {
+     "t": "2026-10-17T12:00",
+     "forecast": 52.7,
+     "low": 28.5,
+     "high": 108.9
+    },
+    {
+     "t": "2026-10-17T13:00",
+     "forecast": 54.8,
+     "low": 29.6,
+     "high": 113.2
+    },
+    {
+     "t": "2026-10-17T14:00",
+     "forecast": 54.7,
+     "low": 29.6,
+     "high": 112.9
+    },
+    {
+     "t": "2026-10-17T15:00",
+     "forecast": 45.9,
+     "low": 24.8,
+     "high": 94.7
+    },
+    {
+     "t": "2026-10-17T16:00",
+     "forecast": 46.2,
+     "low": 25.0,
+     "high": 95.3
+    },
+    {
+     "t": "2026-10-17T17:00",
+     "forecast": 46.5,
+     "low": 25.1,
+     "high": 95.9
+    },
+    {
+     "t": "2026-10-17T18:00",
+     "forecast": 51.9,
+     "low": 28.1,
+     "high": 107.2
+    },
+    {
+     "t": "2026-10-17T19:00",
+     "forecast": 55.8,
+     "low": 30.2,
+     "high": 115.2
+    },
+    {
+     "t": "2026-10-17T20:00",
+     "forecast": 56.2,
+     "low": 30.4,
+     "high": 116.0
+    },
+    {
+     "t": "2026-10-17T21:00",
+     "forecast": 57.5,
+     "low": 31.1,
+     "high": 118.8
+    },
+    {
+     "t": "2026-10-17T22:00",
+     "forecast": 58.6,
+     "low": 31.7,
+     "high": 121.0
+    },
+    {
+     "t": "2026-10-17T23:00",
+     "forecast": 59.2,
+     "low": 32.0,
+     "high": 122.1
+    },
+    {
+     "t": "2026-10-18T00:00",
+     "forecast": 66.6,
+     "low": 36.1,
+     "high": 141.1
+    },
+    {
+     "t": "2026-10-18T01:00",
+     "forecast": 67.2,
+     "low": 36.4,
+     "high": 142.4
+    },
+    {
+     "t": "2026-10-18T02:00",
+     "forecast": 64.1,
+     "low": 34.7,
+     "high": 135.9
+    },
+    {
+     "t": "2026-10-18T03:00",
+     "forecast": 59.6,
+     "low": 32.3,
+     "high": 126.2
+    },
+    {
+     "t": "2026-10-18T04:00",
+     "forecast": 58.8,
+     "low": 31.9,
+     "high": 124.7
+    },
+    {
+     "t": "2026-10-18T05:00",
+     "forecast": 56.1,
+     "low": 30.4,
+     "high": 118.9
+    },
+    {
+     "t": "2026-10-18T06:00",
+     "forecast": 59.8,
+     "low": 32.4,
+     "high": 126.6
+    },
+    {
+     "t": "2026-10-18T07:00",
+     "forecast": 57.9,
+     "low": 31.4,
+     "high": 122.7
+    },
+    {
+     "t": "2026-10-18T08:00",
+     "forecast": 52.1,
+     "low": 28.2,
+     "high": 110.3
+    },
+    {
+     "t": "2026-10-18T09:00",
+     "forecast": 50.7,
+     "low": 27.5,
+     "high": 107.4
+    },
+    {
+     "t": "2026-10-18T10:00",
+     "forecast": 49.7,
+     "low": 26.9,
+     "high": 105.2
+    },
+    {
+     "t": "2026-10-18T11:00",
+     "forecast": 50.2,
+     "low": 27.2,
+     "high": 106.5
+    },
+    {
+     "t": "2026-10-18T12:00",
+     "forecast": 49.5,
+     "low": 26.8,
+     "high": 104.8
+    },
+    {
+     "t": "2026-10-18T13:00",
+     "forecast": 49.7,
+     "low": 26.9,
+     "high": 105.3
+    },
+    {
+     "t": "2026-10-18T14:00",
+     "forecast": 48.6,
+     "low": 26.3,
+     "high": 102.9
+    },
+    {
+     "t": "2026-10-18T15:00",
+     "forecast": 46.7,
+     "low": 25.3,
+     "high": 98.9
+    },
+    {
+     "t": "2026-10-18T16:00",
+     "forecast": 46.8,
+     "low": 25.4,
+     "high": 99.2
+    },
+    {
+     "t": "2026-10-18T17:00",
+     "forecast": 49.3,
+     "low": 26.7,
+     "high": 104.5
+    },
+    {
+     "t": "2026-10-18T18:00",
+     "forecast": 49.0,
+     "low": 26.6,
+     "high": 103.9
+    },
+    {
+     "t": "2026-10-18T19:00",
+     "forecast": 54.4,
+     "low": 29.5,
+     "high": 115.2
+    },
+    {
+     "t": "2026-10-18T20:00",
+     "forecast": 61.1,
+     "low": 33.1,
+     "high": 129.4
+    },
+    {
+     "t": "2026-10-18T21:00",
+     "forecast": 66.0,
+     "low": 35.7,
+     "high": 139.8
+    },
+    {
+     "t": "2026-10-18T22:00",
+     "forecast": 66.4,
+     "low": 36.0,
+     "high": 140.7
+    },
+    {
+     "t": "2026-10-18T23:00",
+     "forecast": 65.4,
+     "low": 35.4,
+     "high": 138.6
+    }
+   ],
+   "daily": [
+    {
+     "day": 5,
+     "from": "2026-10-18T00:00",
+     "to": "2026-10-18T23:00",
+     "hours": 24,
+     "forecast": 56.1,
+     "low": 33.1,
+     "high": 113.7
+    }
+   ]
+  }
+ },
+ "fetch_failures": [],
+ "limits": [
+  "Forecasts show a typical value; on polluted days the real value is often higher.",
+  "Ranges covered roughly 8 in 10 outcomes in past tests overall, but less in some stretches, autumn especially.",
+  "Hyderabad uses a simple baseline, because the model did not beat it.",
+  "The model's edge over simple baselines is modest and was measured on about one year of data."
+ ]
 }
