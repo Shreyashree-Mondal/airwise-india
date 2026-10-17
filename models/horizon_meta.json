@@ -52,7 +52,7 @@
  "trees": 225,
  "train_rows": 1097433,
  "train_origins_to": "2026-10-02 13:00:00",
- "hyderabad": "seasonal baseline (same hour as in the last 24 h); the model did not beat it",
+ "hyderabad": "average of the last 24 hours, held flat; the model did not beat it",
  "calibration": {
   "levels": {
    "Delhi": 0.8,
@@ -84,24 +84,24 @@
    },
    "Hyderabad": {
     "1": [
-     0.7565,
-     1.3143
+     0.781,
+     1.2605
     ],
     "2": [
-     0.744,
-     1.3416
+     0.7653,
+     1.2774
     ],
     "3": [
-     0.7405,
-     1.3586
+     0.7611,
+     1.2836
     ],
     "4": [
-     0.7333,
-     1.3727
+     0.7554,
+     1.3062
     ],
     "5": [
-     0.7244,
-     1.3633
+     0.7446,
+     1.2982
     ]
    },
    "Kolkata": {
@@ -152,24 +152,24 @@
    },
    "Hyderabad": {
     "1": [
-     0.8636,
+     0.863,
      1.1521
     ],
     "2": [
-     0.8377,
-     1.1901
+     0.8369,
+     1.19
     ],
     "3": [
-     0.8296,
-     1.1992
+     0.8295,
+     1.1986
     ],
     "4": [
-     0.8176,
+     0.8172,
      1.2097
     ],
     "5": [
-     0.8058,
-     1.2214
+     0.8057,
+     1.2199
     ]
    },
    "Kolkata": {
@@ -195,6 +195,6 @@
     ]
    }
   },
-  "rule": "range = forecast x [q_lo, q_hi]; Delhi and Kolkata use the model, Hyderabad the seasonal baseline"
+  "rule": "range = forecast x [q_lo, q_hi]; Delhi and Kolkata use the model, Hyderabad the flat average of the last 24 hours"
  }
 }
