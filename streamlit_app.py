@@ -14,7 +14,7 @@ import pandas as pd
 import streamlit as st
 
 from airwise.display import (BANDS, GUIDANCE, ICONS, category, city_notice, clear_days, feed_banner, fmt_age,
-                             fmt_skill, label, period_text, range_labels)
+                             fmt_skill, label, period_text, range_labels, refresh_view)
 
 REPO_URL = "https://github.com/Shreyashree-Mondal/airwise-india"
 CITIES = ["Delhi", "Hyderabad", "Kolkata"]
@@ -26,6 +26,12 @@ BLOCK_NAMES = {"1": "Sep-Oct 2025", "2": "Nov-Dec 2025", "3": "Jan-Feb 2026", "4
 THRESHOLDS = [30, 60, 90, 120]
 
 st.set_page_config(page_title="AirWise India", page_icon="🌫️", layout="wide")
+
+
+def now_ist():
+    """Current time in India (naive). AIRWISE_NOW_IST can override it, which the tests use."""
+    override = os.environ.get("AIRWISE_NOW_IST")
+    return pd.Timestamp(override) if override else pd.Timestamp.now(tz="Asia/Kolkata").tz_localize(None)
 
 
 def load_json(path):
@@ -74,7 +80,8 @@ with tab_outlook:
     if latest is None:
         st.info("No forecast file yet. The scheduled job has not produced one.")
     else:
-        cities = latest.get("cities", {})
+        NOW = now_ist()
+        cities = {c: refresh_view(i, NOW) for c, i in latest.get("cities", {}).items()}
         banner = feed_banner(cities)
         if banner:
             st.warning(banner)
@@ -93,6 +100,8 @@ with tab_outlook:
         if info.get("current_pm25") is not None:
             st.metric(f"Last reading ({info['as_of_ist'].replace('T', ' ')} IST)", f"{info['current_pm25']:.0f} µg/m³")
             st.caption(f"{label(info['current_pm25'])} · reading is {fmt_age(info.get('age_hours'))} old")
+        if info.get("hidden_periods"):
+            st.caption(f"{info['hidden_periods']} earlier forecast period(s) are already in the past and are hidden.")
         if info.get("daily"):
             st.markdown("**Typical daily average for each 24-hour period**")
             st.dataframe(pd.DataFrame([{
@@ -115,7 +124,8 @@ with tab_outlook:
             "Forecasts show a typical value; on polluted days the real value is often higher. Each period is the 24 hours "
             "after the newest reading, so it may not line up with a calendar day. Category names use the CPCB 24-hour PM2.5 "
             "bands as a guide. Suggestions are general information written for this project, not CPCB wording and not "
-            f"medical advice. Last run: {latest['generated_at_utc'].replace('T', ' ').replace('Z', ' UTC')}.")
+            f"medical advice. Forecast file written {pd.Timestamp(latest['generated_at_utc']).strftime('%Y-%m-%d %H:%M UTC')} "
+            f"({fmt_age((NOW - pd.Timedelta(hours=5.5) - pd.Timestamp(latest['generated_at_utc']).tz_localize(None)) / pd.Timedelta(hours=1))} ago).")
         if latest.get("fetch_failures"):
             with st.expander("Data problems on the last run"):
                 st.write(latest["fetch_failures"])
