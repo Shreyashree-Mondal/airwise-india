@@ -21,6 +21,9 @@ GUIDANCE = {
     "Severe": "Consider avoiding outdoor exertion where you can. Sensitive groups should be especially careful.",
 }
 
+STALE_AFTER_HOURS = 6.0     # a newest reading older than this makes the forecast "stale"
+MIN_FUTURE_HOURS = 18       # a 24-hour period is shown only while at least this many of its hours are still ahead
+
 STATUS_TEXT = {
     "insufficient_history": ("info", "Not enough unbroken recent data for a forecast. The model needs a week of readings "
                                       "without a gap longer than three hours."),
@@ -70,6 +73,33 @@ def period_text(start, end):
     return f"{a:%a %d %b %H:%M} to {b:%a %d %b %H:%M}"
 
 
+def refresh_view(info, now_ist):
+    """Bring one city's stored forecast up to the viewer's current time (Indian time).
+
+    The forecast file is written at one moment and read later. This recomputes the age of the newest reading,
+    hides hours that have already passed, hides 24-hour periods that are mostly in the past, and re-derives the
+    status: a forecast with no period left ahead becomes 'outdated'. Cities without a reading are returned as they are.
+    """
+    if not info.get("as_of_ist") or info.get("status") not in ("ok", "stale", "outdated"):
+        return info
+    now = pd.Timestamp(now_ist)
+    out = dict(info)
+    out["age_hours"] = round((now - pd.Timestamp(info["as_of_ist"])) / pd.Timedelta(hours=1), 1)
+    daily = [d for d in info.get("daily", [])
+             if int((pd.date_range(d["from"], d["to"], freq="h") > now).sum()) >= MIN_FUTURE_HOURS]
+    out["hidden_periods"] = len(info.get("daily", [])) - len(daily)
+    if info["status"] in ("ok", "stale"):
+        if daily:
+            out["daily"] = daily
+            out["hourly"] = [h for h in info.get("hourly", []) if pd.Timestamp(h["t"]) > now]
+            out["status"] = "stale" if out["age_hours"] > STALE_AFTER_HOURS else "ok"
+        else:
+            out.pop("daily", None)
+            out.pop("hourly", None)
+            out["status"] = "outdated"
+    return out
+
+
 def city_notice(info):
     """(level, text) to show above a city's numbers, or None when nothing needs saying."""
     status = info.get("status")
@@ -92,7 +122,7 @@ def feed_banner(cities):
         newest = max((i["as_of_ist"] for i in infos if i.get("as_of_ist")), default=None)
         when = f" The newest reading is from {newest.replace('T', ' ')} IST ({fmt_age(min(ages))} ago)." if newest and ages else ""
         return ("The public data feed behind this app appears to be paused for all three cities." + when +
-                " Forecasts update automatically when fresh readings arrive.")
+                " A new forecast appears after the next refresh once fresh readings arrive.")
     return None
 
 
