@@ -46,6 +46,51 @@ def test_skill_formatting_and_clear_days():
     assert D.clear_days(rows, "Delhi") == [2, 3] and D.clear_days(rows, "Hyderabad") == []
 
 
+def _ok_city(origin="2026-10-16T08:00", status="ok"):
+    o = pd.Timestamp(origin)
+    return {"status": status, "as_of_ist": origin, "age_hours": 1.5, "current_pm25": 100.0,
+            "daily": [{"day": d, "from": (o + pd.Timedelta(hours=24 * (d - 1) + 1)).strftime("%Y-%m-%dT%H:%M"),
+                       "to": (o + pd.Timedelta(hours=24 * d)).strftime("%Y-%m-%dT%H:%M"), "hours": 24,
+                       "forecast": 80.0, "low": 50.0, "high": 120.0} for d in range(1, 6)],
+            "hourly": [{"t": (o + pd.Timedelta(hours=h)).strftime("%Y-%m-%dT%H:%M"), "forecast": 80.0, "low": 50.0, "high": 120.0}
+                       for h in range(1, 121)]}
+
+
+def test_refresh_view_keeps_everything_just_after_the_reading():
+    v = D.refresh_view(_ok_city(), "2026-10-16T09:30")
+    assert v["status"] == "ok" and v["age_hours"] == 1.5 and v["hidden_periods"] == 0
+    assert [d["day"] for d in v["daily"]] == [1, 2, 3, 4, 5] and len(v["hourly"]) == 119
+
+
+def test_refresh_view_hides_periods_and_hours_that_have_passed_and_recomputes_the_age():
+    v = D.refresh_view(_ok_city(), "2026-10-19T10:00")          # origin Oct 16 08:00, so 74 hours later
+    assert v["age_hours"] == 74.0 and v["status"] == "stale"
+    assert [d["day"] for d in v["daily"]] == [4, 5] and v["hidden_periods"] == 3
+    assert all(pd.Timestamp(h["t"]) > pd.Timestamp("2026-10-19T10:00") for h in v["hourly"])
+
+
+def test_refresh_view_period_needs_18_future_hours_to_stay():
+    # day 3 ends Oct 19 08:00; day 4 spans Oct 19 09:00 to Oct 20 08:00
+    assert [d["day"] for d in D.refresh_view(_ok_city(), "2026-10-19T14:00")["daily"]] == [4, 5]   # 18 hours of day 4 left
+    assert [d["day"] for d in D.refresh_view(_ok_city(), "2026-10-19T15:00")["daily"]] == [5]      # only 17 left
+
+
+def test_refresh_view_turns_a_fully_past_forecast_into_outdated():
+    v = D.refresh_view(_ok_city(), "2026-10-25T00:00")
+    assert v["status"] == "outdated" and "daily" not in v and "hourly" not in v and v["age_hours"] > 200
+
+
+def test_refresh_view_leaves_other_cases_alone_and_does_not_change_its_input():
+    for info in ({"status": "no_data"}, {"status": "insufficient_history"}, {"status": "weather_unavailable"}):
+        assert D.refresh_view(info, "2026-10-19T10:00") == info
+    original = _ok_city()
+    snapshot = json.loads(json.dumps(original))
+    D.refresh_view(original, "2026-10-19T10:00")
+    assert original == snapshot
+    stale_in = D.refresh_view({"status": "outdated", "as_of_ist": "2026-10-09T01:00", "age_hours": 1.0}, "2026-10-15T17:00")
+    assert stale_in["status"] == "outdated" and stale_in["age_hours"] == 160.0
+
+
 def test_city_notice_by_status():
     assert D.city_notice({"status": "ok"}) is None
     level, text = D.city_notice({"status": "stale", "age_hours": 84.3})
@@ -113,7 +158,7 @@ def replay_csv(path, n_origins=3):
     pd.DataFrame(rows).to_csv(path, index=False)
 
 
-def run_app(tmp_path, monkeypatch, latest=None, evidence=EVIDENCE, replay=True):
+def run_app(tmp_path, monkeypatch, latest=None, evidence=EVIDENCE, replay=True, now="2026-10-16T09:30"):
     data, models = tmp_path / "data", tmp_path / "models"
     data.mkdir(exist_ok=True)
     models.mkdir(exist_ok=True)
@@ -125,6 +170,7 @@ def run_app(tmp_path, monkeypatch, latest=None, evidence=EVIDENCE, replay=True):
         replay_csv(data / "replay_daily.csv")
     monkeypatch.setenv("AIRWISE_DATA_DIR", str(data))
     monkeypatch.setenv("AIRWISE_MODELS_DIR", str(models))
+    monkeypatch.setenv("AIRWISE_NOW_IST", now)
     at = AppTest.from_file(APP, default_timeout=90).run()
     assert not at.exception, [e.value for e in at.exception]
     return at
@@ -155,6 +201,7 @@ def test_hyderabad_is_described_as_the_flat_average(tmp_path, monkeypatch):
     (data / "latest.json").write_text(json.dumps(p))
     monkeypatch.setenv("AIRWISE_DATA_DIR", str(data))
     monkeypatch.setenv("AIRWISE_MODELS_DIR", str(tmp_path / "none"))
+    monkeypatch.setenv("AIRWISE_NOW_IST", "2026-10-16T09:30")
     at = AppTest.from_file(APP, default_timeout=90).run()
     at.radio[0].set_value("Hyderabad").run()
     assert not at.exception
@@ -164,7 +211,7 @@ def test_hyderabad_is_described_as_the_flat_average(tmp_path, monkeypatch):
 
 def test_stale_data_shows_the_banner_and_only_the_remaining_periods(tmp_path, monkeypatch):
     stale = {c: city_info("stale", windows=(3, 4, 5), age=41.5, origin="2026-10-14T01:00") for c in CITIES}
-    at = run_app(tmp_path, monkeypatch, payload(**stale))
+    at = run_app(tmp_path, monkeypatch, payload(**stale), now="2026-10-15T18:30")
     assert any("paused" in w.value for w in at.warning)
     assert len(at.dataframe[0].value) == 3
     assert any("Last reading (2026-10-14 01:00 IST)" in m.label for m in at.metric)
@@ -172,7 +219,7 @@ def test_stale_data_shows_the_banner_and_only_the_remaining_periods(tmp_path, mo
 
 def test_outdated_data_shows_no_forecast_but_says_so(tmp_path, monkeypatch):
     out = {c: city_info("outdated", age=160, origin="2026-10-09T01:00") for c in CITIES}
-    at = run_app(tmp_path, monkeypatch, payload(**out))
+    at = run_app(tmp_path, monkeypatch, payload(**out), now="2026-10-15T17:00")
     assert any("paused" in w.value for w in at.warning)
     assert any("No forecast is shown" in e.value for e in at.error)
     assert at.metric[0].label.startswith("Last reading")
@@ -187,6 +234,24 @@ def test_each_city_gets_its_own_message(tmp_path, monkeypatch):
     assert any("unbroken" in i.value for i in at.info)
     at.radio[0].set_value("Hyderabad").run()
     assert any("weather source" in w.value for w in at.warning)
+
+
+def test_an_old_forecast_file_is_shown_from_todays_point_of_view(tmp_path, monkeypatch):
+    p = payload(**{c: city_info("ok") for c in CITIES})                       # written for 16 Oct, 08:00
+    at = run_app(tmp_path, monkeypatch, p, now="2026-10-19T10:00")
+    table = at.dataframe[0].value
+    assert len(table) == 2 and "Wed 21 Oct" in table["Period (IST)"].tolist()[-1]   # only the periods still ahead
+    caps = " ".join(c.value for c in at.caption)
+    assert "3 earlier forecast period(s) are already in the past" in caps
+    assert any("74 hours (3 days 2 hours)" in w.value for w in at.warning)      # age counted from now, not from the file
+    assert "Forecast file written 2026-10-16 09:00 UTC" in caps
+    assert not any("Fri 16 Oct" in str(r) for r in table["Period (IST)"].tolist())
+
+
+def test_a_forecast_that_is_entirely_in_the_past_says_so(tmp_path, monkeypatch):
+    at = run_app(tmp_path, monkeypatch, payload(**{c: city_info("ok") for c in CITIES}), now="2026-10-25T00:00")
+    assert any("No forecast is shown" in e.value for e in at.error)
+    assert "Typical daily average" not in text_of(at) and at.metric[0].label.startswith("Last reading")
 
 
 def test_missing_forecast_file_is_explained_not_a_crash(tmp_path, monkeypatch):
